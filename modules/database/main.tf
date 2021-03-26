@@ -1,7 +1,3 @@
-data "google_compute_network" "default" {
-  name = "default"
-}
-
 resource "random_pet" "postgres" {
   length = 2
 }
@@ -16,7 +12,7 @@ resource "google_sql_database_instance" "tfe" {
     disk_size         = var.disk_size
     ip_configuration {
       ipv4_enabled    = false
-      private_network = data.google_compute_network.default.self_link
+      private_network = var.network
     }
 
     backup_configuration {

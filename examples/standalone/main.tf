@@ -21,6 +21,4 @@ module "tfe" {
   ssl_certificate_name = var.ssl_certificate_name
   dns_zone_name        = var.dns_zone_name
   load_balancer        = "PUBLIC"
-  network              = var.network
-  subnetwork           = var.subnetwork
 }
