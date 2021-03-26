@@ -1,5 +1,5 @@
 locals {
-  labels                      = { "label" : "label" } # TODO - not verified until apply
+  labels                      = { "env" : "lab" } # TODO - not verified until apply
   disable_services_on_destroy = false
 }
 

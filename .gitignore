@@ -19,3 +19,5 @@ examples/**/*.pem
 
 # Environment files
 *.env
+
+*.rli
