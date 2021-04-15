@@ -69,8 +69,11 @@ jq ". + { ca_certs: { value: \"$(cat $${cert_pathname})\" } }" -- /etc/ptfe-sett
 cp ./ptfe-settings.json.updated /etc/ptfe-settings.json
 %{ endif ~}
 
+# Retrieve Sabre TLS cert and private key
+gcloud secrets versions access latest --secret=${tls_cert_secret_id} > ${server_cert_path}
+gcloud secrets versions access latest --secret=${tls_certkey_secret_id} > ${server_key_path}
 # Retrieve license
-http_proxy="" https_proxy="" gsutil cp "gs://${bucket_name}/${tfe_license}" /etc/ptfe-license.rli
+gcloud secrets versions access latest --secret=${tfe_license_secret_id} > /etc/ptfe-license.rli
 
 %{ if airgap_url != "" ~}
 # Retrieve airgap config

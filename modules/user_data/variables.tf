@@ -1,7 +1,7 @@
 # Required Variables
 variable "fqdn" {}
 variable "install_id" {}
-variable "tfe_license" {}
+# variable "tfe_license" {}
 variable "active_active" {
   default = false
   type    = bool
@@ -161,4 +161,20 @@ variable "server_cert_path" {
 variable "server_key_path" {
   default     = ""
   description = "Path on the remote server to the private key of the well known certificate set in server_cert_path. Required if server_cert_path is set. (Do not set this if you are setting the letsencrypt_email parameter"
+}
+
+## variables for TLS cert,key secrets
+variable "tls_cert_secret_id" {
+  default     = "TFE_CERT"
+  description = "tls cert secret id in gcp secret manager"
+}
+
+variable "tls_certkey_secret_id" {
+  default     = "TFE_CERTKEY"
+  description = "tls private key secret id in gcp secret manager"
+}
+
+variable "tfe_license_secret_id" {
+  default     = "TFE_LICENSSE"
+  description = "TFE license secret id in gcp secret manager"
 }

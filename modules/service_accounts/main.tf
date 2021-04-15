@@ -28,3 +28,8 @@ resource "google_project_iam_member" "log_writer" {
   member = "serviceAccount:${google_service_account.main.email}"
   role   = "roles/logging.logWriter"
 }
+
+resource "google_project_iam_member" "secret_accessor" {
+  member = "serviceAccount:${google_service_account.main.email}"
+  role   = "roles/secretmanager.secretAccessor"
+}

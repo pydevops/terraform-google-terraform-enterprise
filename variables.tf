@@ -124,15 +124,10 @@ variable "vm_auto_healing_enabled" {
   description = "Auto healing for the instance group"
 }
 # TFE VARS
-variable "tfe_license_name" {
-  default     = "license.rli"
-  description = "Name of the stored TFE license"
-}
-variable "tfe_license_secret_id" {
-  default ="TFE_LICENSE"
-  description = "TFE license secret id in secret manager"
-}
-
+# variable "tfe_license_name" {
+#   default     = "license.rli"
+#   description = "Name of the stored TFE license"
+# }
 # variable "tfe_license_path" {
 #   description = "Local path to the TFE license file"
 # }
@@ -141,4 +136,18 @@ variable "fqdn" {
 }
 variable "ssl_certificate_name" {
   description = "Name of the created managed SSL certificate. Required when load_balancer == \"PUBLIC\" or load_balancer == \"PRIVATE\"."
+}
+
+
+variable "tfe_license_secret_id" {
+  default     = "TFE_LICENSE"
+  description = "TFE license secret id in secret manager"
+}
+variable "tls_cert_secret_id" {
+  default     = "TFE_CERT"
+  description = "tls cert secret id in gcp secret manager"
+}
+variable "tls_certkey_secret_id" {
+  default     = "TFE_CERTKEY"
+  description = "tls private key secret id in gcp secret manager"
 }

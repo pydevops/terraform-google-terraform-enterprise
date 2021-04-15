@@ -37,8 +37,7 @@ module "object_storage" {
 
   namespace    = var.namespace
   labels       = local.labels
-  license_name = var.tfe_license_name
-  license_secret_id = var.tfe_license_secret_id
+  #license_name = var.tfe_license_name
   #license_path = var.tfe_license_path
 }
 
@@ -115,7 +114,7 @@ module "user_data" {
   gcs_bucket              = module.object_storage.bucket
   gcs_credentials         = module.service_accounts.credentials
   gcs_project             = module.object_storage.project
-  tfe_license             = var.tfe_license_name
+  # tfe_license             = var.tfe_license_name
   pg_netloc               = module.database.netloc
   pg_dbname               = module.database.dbname
   pg_user                 = module.database.user
@@ -130,6 +129,11 @@ module "user_data" {
   proxy_cert              = local.proxy_cert
   namespace               = var.namespace
   no_proxy                = [var.fqdn, var.networking_subnet_range]
+  tfe_license_secret_id   = var.tfe_license_secret_id
+  tls_cert_secret_id      = "TFE_CERT"
+  tls_certkey_secret_id   = "TFE_CERTKEY"
+  server_cert_path        = "/etc/ssl/certs/tfe-cert.pem"
+  server_key_path         = "/etc/ssl/private/tfe-certkey.epm"
 }
 
 module "vm" {

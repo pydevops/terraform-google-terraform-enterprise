@@ -39,7 +39,21 @@ resource "random_id" "user_token" {
   byte_length = 16
 }
 
+## data source 
+# data "google_secret_manager_secret_version" "tls_cert" {
+#   secret  = var.tls_cert_secret_id
+#   project = var.secret_project_id
+# }
+
+# data "google_secret_manager_secret_version" "tls_certkey" {
+#   secret  = var.tls_certkey_secret_id
+#   project = var.secret_project_id
+# }
+
+## data source 
+
 locals {
+
   base_configs = {
     archivist_token = {
       value = random_id.archivist_token.hex
@@ -263,10 +277,17 @@ locals {
   user_data = templatefile(
     "${path.module}/templates/tfe_vm.sh.tpl",
     {
+      # override the system default TLS key pair with the custom one, as well as license
+      server_cert_path      = var.server_cert_path
+      tls_cert_secret_id    = var.tls_cert_secret_id
+      server_key_path       = var.server_key_path
+      tls_certkey_secret_id = var.tls_certkey_secret_id
+      tfe_license_secret_id     = var.tfe_license_secret_id
+      # override the system default TLS key pair with the custom one,  as well as license
       airgap_url         = var.airgap_url
       docker_config      = filebase64("${path.module}/files/daemon.json")
       bucket_name        = var.gcs_bucket
-      tfe_license        = var.tfe_license
+      # tfe_license        = var.tfe_license
       monitoring_enabled = var.monitoring_enabled
       replicated         = base64encode(local.repl_configs)
       settings           = base64encode(local.tfe_configs)
