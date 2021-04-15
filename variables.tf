@@ -128,9 +128,14 @@ variable "tfe_license_name" {
   default     = "license.rli"
   description = "Name of the stored TFE license"
 }
-variable "tfe_license_path" {
-  description = "Local path to the TFE license file"
+variable "tfe_license_secret_id" {
+  default ="TFE_LICENSE"
+  description = "TFE license secret id in secret manager"
 }
+
+# variable "tfe_license_path" {
+#   description = "Local path to the TFE license file"
+# }
 variable "fqdn" {
   description = "Fully qualified domain name for the TFE endpoint"
 }

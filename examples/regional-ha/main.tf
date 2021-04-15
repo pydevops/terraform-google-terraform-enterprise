@@ -15,7 +15,8 @@ module "tfe" {
 
   namespace                  = var.namespace
   node_count                 = 1
-  tfe_license_path           = var.tfe_license_path
+  # tfe_license_path         = var.tfe_license_path
+  tfe_license_secret_id      = var.tfe_license_secret_id
   tfe_license_name           = var.tfe_license_name
   fqdn                       = var.fqdn
   ssl_certificate_name       = var.ssl_certificate_name
