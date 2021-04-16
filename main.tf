@@ -133,7 +133,7 @@ module "user_data" {
   tls_cert_secret_id      = "TFE_CERT"
   tls_certkey_secret_id   = "TFE_CERTKEY"
   server_cert_path        = "/etc/ssl/certs/tfe-cert.pem"
-  server_key_path         = "/etc/ssl/private/tfe-certkey.epm"
+  server_key_path         = "/etc/ssl/private/tfe-certkey.pem"
 }
 
 module "vm" {
