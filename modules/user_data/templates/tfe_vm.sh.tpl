@@ -69,7 +69,7 @@ jq ". + { ca_certs: { value: \"$(cat $${cert_pathname})\" } }" -- /etc/ptfe-sett
 cp ./ptfe-settings.json.updated /etc/ptfe-settings.json
 %{ endif ~}
 
-# Retrieve Sabre TLS cert and private key
+# Retrieve TLS cert and private key
 gcloud secrets versions access latest --secret=${tls_cert_secret_id} > ${server_cert_path}
 gcloud secrets versions access latest --secret=${tls_certkey_secret_id} > ${server_key_path}
 # Retrieve license
