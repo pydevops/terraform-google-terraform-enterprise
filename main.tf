@@ -130,8 +130,8 @@ module "user_data" {
   namespace               = var.namespace
   no_proxy                = [var.fqdn, var.networking_subnet_range]
   tfe_license_secret_id   = var.tfe_license_secret_id
-  tls_cert_secret_id      = "TFE_CERT"
-  tls_certkey_secret_id   = "TFE_CERTKEY"
+  tls_cert_secret_id      = var.tls_cert_secret_id
+  tls_certkey_secret_id   = var.tls_certkey_secret_id
   server_cert_path        = "/etc/ssl/certs/tfe-cert.pem"
   server_key_path         = "/etc/ssl/private/tfe-certkey.pem"
 }
