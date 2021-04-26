@@ -22,4 +22,5 @@ module "tfe" {
   dns_zone_name              = var.dns_zone_name
   load_balancer              = "PUBLIC"
   database_availability_type = var.database_availability_type
+  database_machine_type      = var.database_machine_type
 }
