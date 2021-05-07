@@ -178,3 +178,7 @@ variable "tfe_license_secret_id" {
   default     = "TFE_LICENSSE"
   description = "TFE license secret id in gcp secret manager"
 }
+
+variable "dnsmasq_ip" {
+  description = "dnsmasq server ip"
+}

@@ -151,3 +151,15 @@ variable "tls_certkey_secret_id" {
   default     = "TFE_CERTKEY"
   description = "tls private key secret id in gcp secret manager"
 }
+
+
+variable "dnsmasq" {
+  type = map(any)
+  default = {
+    disk_source_image    = ""
+    zone                 = "us-central1-c"
+    domain_name          = "sabre.com"
+    upstream_dns_server  = "8.8.8.8"
+    bitbucket_ip_address = "192.168.1.1"
+  }
+}

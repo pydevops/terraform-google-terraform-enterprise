@@ -53,6 +53,11 @@ resource "google_compute_firewall" "tfe" {
     ports    = concat(["80", "443", "6443", "8800", "23010"], var.firewall_ports)
   }
 
+  allow {
+    protocol = "udp"
+    ports    = ["53"]
+  }
+
   source_ranges = var.ip_allow_list
 }
 

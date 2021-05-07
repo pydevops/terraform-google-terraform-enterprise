@@ -1,4 +1,5 @@
 {
     "storage-driver": "overlay2",
-    "log-driver": "gcplogs"
+    "log-driver": "gcplogs",
+    "dns": ["${dnsmasq_ip}"]
 }

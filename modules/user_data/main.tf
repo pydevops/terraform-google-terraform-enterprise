@@ -274,6 +274,11 @@ locals {
 }
 
 locals {
+  daemon_json = templatefile("${path.module}/files/daemon.json",
+    {
+      dnsmasq_ip = var.dnsmasq_ip
+    }
+  )
   user_data = templatefile(
     "${path.module}/templates/tfe_vm.sh.tpl",
     {
@@ -282,11 +287,11 @@ locals {
       tls_cert_secret_id    = var.tls_cert_secret_id
       server_key_path       = var.server_key_path
       tls_certkey_secret_id = var.tls_certkey_secret_id
-      tfe_license_secret_id     = var.tfe_license_secret_id
+      tfe_license_secret_id = var.tfe_license_secret_id
       # override the system default TLS key pair with the custom one,  as well as license
-      airgap_url         = var.airgap_url
-      docker_config      = filebase64("${path.module}/files/daemon.json")
-      bucket_name        = var.gcs_bucket
+      airgap_url    = var.airgap_url
+      docker_config = base64encode(local.daemon_json)
+      bucket_name   = var.gcs_bucket
       # tfe_license        = var.tfe_license
       monitoring_enabled = var.monitoring_enabled
       replicated         = base64encode(local.repl_configs)

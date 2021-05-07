@@ -35,8 +35,8 @@ locals {
 module "object_storage" {
   source = "./modules/object_storage"
 
-  namespace    = var.namespace
-  labels       = local.labels
+  namespace = var.namespace
+  labels    = local.labels
   #license_name = var.tfe_license_name
   #license_path = var.tfe_license_path
 }
@@ -108,12 +108,12 @@ locals {
 module "user_data" {
   source = "./modules/user_data"
 
-  fqdn                    = var.fqdn
-  install_id              = ""
-  airgap_url              = ""
-  gcs_bucket              = module.object_storage.bucket
-  gcs_credentials         = module.service_accounts.credentials
-  gcs_project             = module.object_storage.project
+  fqdn            = var.fqdn
+  install_id      = ""
+  airgap_url      = ""
+  gcs_bucket      = module.object_storage.bucket
+  gcs_credentials = module.service_accounts.credentials
+  gcs_project     = module.object_storage.project
   # tfe_license             = var.tfe_license_name
   pg_netloc               = module.database.netloc
   pg_dbname               = module.database.dbname
@@ -134,6 +134,7 @@ module "user_data" {
   tls_certkey_secret_id   = var.tls_certkey_secret_id
   server_cert_path        = "/etc/ssl/certs/tfe-cert.pem"
   server_key_path         = "/etc/ssl/private/tfe-certkey.pem"
+  dnsmasq_ip              = module.dnsmasq.internal_address
 }
 
 module "vm" {
@@ -198,4 +199,12 @@ locals {
     var.load_balancer == "PRIVATE" ? module.private_load_balancer.0.address : module.private_tcp_load_balancer.0.address
   )
   hostname = var.dns_create_record ? var.fqdn : local.lb_address
+}
+
+module "dnsmasq" {
+  source = "./modules/dnsmasq"
+
+  subnetwork      = local.subnetwork
+  service_account = module.service_accounts.email
+  dnsmasq         = var.dnsmasq
 }
