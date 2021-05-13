@@ -134,7 +134,8 @@ module "user_data" {
   tls_certkey_secret_id   = var.tls_certkey_secret_id
   server_cert_path        = "/etc/ssl/certs/tfe-cert.pem"
   server_key_path         = "/etc/ssl/private/tfe-certkey.pem"
-  dnsmasq_ip              = module.dnsmasq.internal_address
+  #dnsmasq_ip              = module.dnsmasq.internal_address
+  dnsmasq_ip              = "169.254.169.254"
 }
 
 module "vm" {
@@ -201,10 +202,10 @@ locals {
   hostname = var.dns_create_record ? var.fqdn : local.lb_address
 }
 
-module "dnsmasq" {
-  source = "./modules/dnsmasq"
+# module "dnsmasq" {
+#   source = "./modules/dnsmasq"
 
-  subnetwork      = local.subnetwork
-  service_account = module.service_accounts.email
-  dnsmasq         = var.dnsmasq
-}
+#   subnetwork      = local.subnetwork
+#   service_account = module.service_accounts.email
+#   dnsmasq         = var.dnsmasq
+# }
