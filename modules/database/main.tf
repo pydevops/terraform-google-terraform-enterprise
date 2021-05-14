@@ -13,6 +13,7 @@ resource "google_sql_database_instance" "tfe" {
     ip_configuration {
       ipv4_enabled    = false
       private_network = var.network
+      require_ssl     = false
     }
 
     backup_configuration {
