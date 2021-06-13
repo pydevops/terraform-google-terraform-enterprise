@@ -7,6 +7,7 @@ resource "google_storage_bucket" "tfe-bucket" {
   location = "us"
 
   labels = var.labels
+  force_destroy = true
 }
 
 # data "google_secret_manager_secret_version" "license" {
